@@ -1,3 +1,35 @@
+import mysql.connector as mql
+
+obj = mql.connect(host = "localhost", user = "root", passwd = "hayden", database = "hotel")
+
+cr = obj.cursor()
+
+def room_count():
+    c1 = 0
+    c2 = 0
+    c3 = 0
+    c4 = 0
+
+    cr.execute("select roomno ,Guest from rooms")
+    x = cr.fetchall()
+
+    for i in x:
+        if i[0] in range(1,41) and i[1].lower() != "null":
+            c1+=1                
+        elif i[0]  in range(41, 61) and i[1].lower() != "null":
+            c2+=1
+        elif i[0] in range(61,71) and i[1].lower() != "null":
+            c3+=1
+        else:
+            c4+=1
+    print(f'''Avaliable rooms
+    Standard Rooms: {c1}
+    Superior Rooms: {c2}
+    Executive Rooms: {c3}
+    Presidential Suite: {c4}
+    ''')
+
+
 print("""Please Chose An Option
 1) Adding Guest
 2) Removing Guest""")
@@ -13,31 +45,8 @@ while True:
         guest_n = int(input("Number of Guests: "))
 
         print()
-        """
-        c1 = 0
-        c2 = 0
-        c3 = 0
-        c4 = 0
-        while True:
-            x = load()
-            if x(Name) == null:
-                if x(room) in range(1,41):
-                    c1+=1
-                elif x(room) in range(41, 61):
-                    c2+=1
-                elif x(room) in range(61,71):
-                    c3+=1
-                else:
-                    c4+=1
-        print('''Avaliable rooms
-        Standard Rooms: {c1}
-        Superior Rooms: {c2}
-        Executive Rooms: {c3}
-        Presidential Suite: {c4}
-        ''')
-
-        """
         
+        room_count()
 
         print("Enter the room type below: ")
         print()
@@ -63,11 +72,48 @@ while True:
         #create a list that contains [name, [room types], phone number]
         #put the cost in the sql file as well so its easy to add
         #store the amount of times each room is used
-        break
+        for i in range(4): # [1,2,3,4]
+            a = 0
+            b = 0
+            c = 0
+            d = 0
+
+            if i == 0:
+                while a < room_l2[i]:
+                    cr.execute("select min(roomno) where guest = Null")
+                    x = cr.fetchone()
+
+                    cr.execute(f"update rooms set guest = '{guest}', noguest = {guest_n}, phonenum = {pnum} where roomno = {x}")
+                    a += 1
+            
+            elif i == 1:
+                while b < room_l2[i]:
+                    cr.execute("select min(roomno) where guest = Null and  between 61 and 100 ")
+                    x = cr.fetchone()
+
+                    cr.execute(f"update rooms set guest = '{guest}', noguest = {guest_n}, phonenum = {pnum} where roomno = {x}")
+                    b += 1
+
+            elif i == 2:
+                while c < room_l2[i]:
+                    cr.execute("select min(roomno) where guest = Null and between 101 and 120")
+                    x = cr.fetchone()
+
+                    cr.execute(f"update rooms set guest = '{guest}', noguest = {guest_n}, phonenum = {pnum} where roomno = {x}")
+                    c += 1
+            
+            elif i == 3:
+                while d < room_l2[i]:
+                    cr.execute("select min(roomno) where guest = Null and between 121 and 130 ")
+                    x = cr.fetchone()
+
+                    cr.execute(f"update rooms set guest = '{guest}', noguest = {guest_n}, phonenum = {pnum} where roomno = {x}")
+                    d += 1
         #To add the billing and stuff as well
 
     elif cho == 2:
-        break #we need to learn the sql side for this
+        n = input("Enter the guest name to be removed: ")
+        cr.execute(f"update rooms set guest = Null, noguest = 0, phonenumber = 0 where guest = '{n}' ")
 
     else:
         print("Invalid Input. Only enter '1' or '2'")
