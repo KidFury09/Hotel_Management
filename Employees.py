@@ -1,6 +1,6 @@
 import mysql.connector as mql
 
-obj = mql.connect(host = "localhost", user = "root", passwd = "hayden", database = "emp")
+obj = mql.connect(host = "localhost", user = "root", passwd = "hayden", database = "hotel")
 cr = obj.cursor()
 
 def display():
@@ -29,8 +29,8 @@ def add():
     dept = input("Department: ")
     sal = int(input("Salary: "))
 
-    cr.execute(f"insert into emp values ({id}, '{name}', '{dept}, {sal}')")
-    cr.commit()
+    cr.execute(f"insert into emp values ({id}, '{name}', '{dept}', {sal})")
+    obj.commit()
     print()
 
 def update():
@@ -41,12 +41,41 @@ def update():
     sal = int(input("Salary: "))
 
     cr.execute(f"update emp set name = '{name}', dept = '{dept}', salary = {sal} where empid = {id}")
-    cr.commit()
+    obj.commit()
     print()
 
 def delete():
     id = int(input("Enter the Id to be deleted: "))
     cr.execute(f"delete from emp where empid = {id}")
-    cr.commit()
+    obj.commit()
     print()
 
+def employee():
+    while True:
+        print()
+        print("""Choose an option from below
+        
+        a) Employee Data
+        b) Search Id
+        c) Add Employee
+        d) Update Id
+        e) Delete Id
+        f) Exit
+        """)
+        cho = input("Enter your option: ")
+
+        if cho.lower() == "a":
+            display()
+        elif cho.lower() == "b":
+            search()
+        elif cho.lower() == "c":
+            add()
+        elif cho.lower() == "d":
+            update()
+        elif cho.lower() == "e":
+            delete()
+        elif cho.lower() == "f":
+            break
+        else:
+            print()
+            print("Invalid entry")
