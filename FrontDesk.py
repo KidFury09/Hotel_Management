@@ -14,14 +14,14 @@ def room_count():
     x = cr.fetchall()
 
     for i in x:
-        if i[0] in range(1,41) and i[1].lower() != "null":
+        if i[0] in range(1,41) and i[1] == None: # 40 rooms
             c1+=1                
-        elif i[0]  in range(41, 61) and i[1].lower() != "null":
+        elif i[0]  in range(41, 61) and i[1] == None: #20 rooms
             c2+=1
-        elif i[0] in range(61,71) and i[1].lower() != "null":
+        elif i[0] in range(61,71) and i[1] == None: #10
             c3+=1
-        else:
-            c4+=1
+        else:   
+            c4+=1 #5 rooms
     print(f'''Avaliable rooms
     Standard Rooms: {c1}
     Superior Rooms: {c2}
@@ -82,8 +82,9 @@ while True:
                 while a < room_l2[i]:
                     cr.execute("select min(roomno) where guest = Null")
                     x = cr.fetchone()
-
-                    cr.execute(f"update rooms set guest = '{guest}', noguest = {guest_n}, phonenum = {pnum} where roomno = {x}")
+                    
+                    cr.execute(f"update rooms set guest = '{guest}', noguest = {guest_n}, phonenum = {pnum} where roomno = {x[0]}")
+                    cr.execute(f"update rooms set count += 1 where {x[0]}")
                     a += 1
             
             elif i == 1:
@@ -91,7 +92,8 @@ while True:
                     cr.execute("select min(roomno) where guest = Null and  between 61 and 100 ")
                     x = cr.fetchone()
 
-                    cr.execute(f"update rooms set guest = '{guest}', noguest = {guest_n}, phonenum = {pnum} where roomno = {x}")
+                    cr.execute(f"update rooms set guest = '{guest}', noguest = {guest_n}, phonenum = {pnum} where roomno = {x[0]}")
+                    cr.execute(f"update rooms set count += 1 where {x[0]}")
                     b += 1
 
             elif i == 2:
@@ -99,7 +101,8 @@ while True:
                     cr.execute("select min(roomno) where guest = Null and between 101 and 120")
                     x = cr.fetchone()
 
-                    cr.execute(f"update rooms set guest = '{guest}', noguest = {guest_n}, phonenum = {pnum} where roomno = {x}")
+                    cr.execute(f"update rooms set guest = '{guest}', noguest = {guest_n}, phonenum = {pnum} where roomno = {x[0]}")
+                    cr.execute(f"update rooms set count += 1 where {x[0]}")
                     c += 1
             
             elif i == 3:
@@ -107,7 +110,8 @@ while True:
                     cr.execute("select min(roomno) where guest = Null and between 121 and 130 ")
                     x = cr.fetchone()
 
-                    cr.execute(f"update rooms set guest = '{guest}', noguest = {guest_n}, phonenum = {pnum} where roomno = {x}")
+                    cr.execute(f"update rooms set guest = '{guest}', noguest = {guest_n}, phonenum = {pnum} where roomno = {x[0]}")
+                    cr.execute(f"update rooms set count += 1 where {x[0]}")
                     d += 1
         #To add the billing and stuff as well
 
