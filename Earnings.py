@@ -6,11 +6,14 @@ def earning():
 
     cr = obj.cursor()
 
+    #import this from the sql file
+    #better to import each sperately, else a list
+    #sum of the worker salaries
     cr.execute("select sum(count) from rooms where roomno between 1 and 40")
     a = cr.fetchone()
     a = int(a[0])    
     print(f"Number of Standard Room: {a}")
-
+    
     cr.execute("select sum(count) from rooms where roomno between 41 and 60")
     b = cr.fetchone()
     b = int(b[0])
@@ -26,8 +29,12 @@ def earning():
     d = int(d[0])
     print(f"Number of Presidential: {d}")
 
+
     colors = ["red", "orange", "yellow", "lightskyblue"]
 
-    mpl.pie([a, b, c, d], labels = ["Standard Rooms", "Superior Rooms", "Executive Rooms", "Presidential Suites"], colors = colors)
-
-    mpl.show()
+    if a == 0 or b == 0 or c == 0 or d == 0:
+        print()
+        
+    else:    
+        mpl.pie([a, b, c, d], labels = ["Standard Rooms", "Superior Rooms", "Executive Rooms", "Presidential Suites"], colors = colors)
+        mpl.show()
