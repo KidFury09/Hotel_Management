@@ -30,15 +30,16 @@ def room_count():
     ''')
 
 
-print("""Please Chose An Option
-1) Adding Guest
-2) Removing Guest""")
-print()
 
 while True:
-    cho = int(input("Enter your choice here: "))
+    print("""Please Chose An Option
+1) Adding Guest
+2) Removing Guest""")
     print()
-    if cho == 1:
+
+    cho = input("Enter your choice here: ")
+    print()
+    if cho == "1":
         guest = input("Customer name: " )
         pnum = input("Phone number: ")
         print()
@@ -80,44 +81,53 @@ while True:
 
             if i == 0:
                 while a < room_l2[i]:
-                    cr.execute("select min(roomno) where guest = Null")
+                    cr.execute("select min(roomno) from rooms where guest is null and roomno between 1 and 40")
                     x = cr.fetchone()
-                    
-                    cr.execute(f"update rooms set guest = '{guest}', noguest = {guest_n}, phonenum = {pnum} where roomno = {x[0]}")
-                    cr.execute(f"update rooms set count += 1 where {x[0]}")
+                    x = int(x[0])
+
+                    cr.execute(f"update rooms set guest = '{guest}', noguest = {guest_n}, phonenum = {pnum} where roomno = {x}")
+                    cr.execute(f"update rooms set count = count + 1 where roomno = {x}")
                     a += 1
+                    obj.commit()
             
             elif i == 1:
                 while b < room_l2[i]:
-                    cr.execute("select min(roomno) where guest = Null and  between 61 and 100 ")
+                    cr.execute("select min(roomno)from rooms where guest is null and roomno between 41 and 60 ")
                     x = cr.fetchone()
+                    x = int(x[0])
 
-                    cr.execute(f"update rooms set guest = '{guest}', noguest = {guest_n}, phonenum = {pnum} where roomno = {x[0]}")
-                    cr.execute(f"update rooms set count += 1 where {x[0]}")
+                    cr.execute(f"update rooms set guest = '{guest}', noguest = {guest_n}, phonenum = {pnum} where roomno = {x}")
+                    cr.execute(f"update rooms set count = count + 1 where roomno = {x}")
                     b += 1
+                    obj.commit()
 
             elif i == 2:
                 while c < room_l2[i]:
-                    cr.execute("select min(roomno) where guest = Null and between 101 and 120")
+                    cr.execute("select min(roomno) from rooms where guest is null and roomno between 61 and 70")
                     x = cr.fetchone()
+                    x = int(x[0])
 
-                    cr.execute(f"update rooms set guest = '{guest}', noguest = {guest_n}, phonenum = {pnum} where roomno = {x[0]}")
-                    cr.execute(f"update rooms set count += 1 where {x[0]}")
+                    cr.execute(f"update rooms set guest = '{guest}', noguest = {guest_n}, phonenum = {pnum} where roomno = {x}")
+                    cr.execute(f"update rooms set count = count + 1 where roomno = {x}")
                     c += 1
+                    obj.commit()
             
             elif i == 3:
                 while d < room_l2[i]:
-                    cr.execute("select min(roomno) where guest = Null and between 121 and 130 ")
+                    cr.execute("select min(roomno) from rooms where guest is Null and roomno between 71 and 75 ")
                     x = cr.fetchone()
+                    x = int(x[0])
 
-                    cr.execute(f"update rooms set guest = '{guest}', noguest = {guest_n}, phonenum = {pnum} where roomno = {x[0]}")
-                    cr.execute(f"update rooms set count += 1 where {x[0]}")
+                    cr.execute(f"update rooms set guest = '{guest}', noguest = {guest_n}, phonenum = {pnum} where roomno = {x}")
+                    cr.execute(f"update rooms set count = count + 1 where roomno = {x}")
                     d += 1
+                    obj.commit()
         #To add the billing and stuff as well
 
-    elif cho == 2:
+    elif cho == "2":
         n = input("Enter the guest name to be removed: ")
-        cr.execute(f"update rooms set guest = Null, noguest = 0, phonenumber = 0 where guest = '{n}' ")
+        cr.execute(f"update rooms set guest = Null, noguest = 0, phonenum = Null where guest = '{n}' ")
+        obj.commit()
 
     else:
         print("Invalid Input. Only enter '1' or '2'")
