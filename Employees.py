@@ -4,6 +4,7 @@ obj = mql.connect(host = "localhost", user = "root", passwd = "hayden", database
 cr = obj.cursor()
 
 def display():
+    print()
     cr.execute("select * from emp")
     x = cr.fetchall()
 
@@ -14,67 +15,101 @@ def display():
     print()
 
 def search():
+    print()
     id = int(input("Enter the employee id: "))
     cr.execute(f"select * from emp where empid = {id}")
     x = cr.fetchone()
 
-    print("{:^9}{:^30}{:^15}{:^10}".format("Id", "Name", "Department", "Salary"))
-    print("{:^9}{:^30}{:^15}{:^10}".format(x[0], x[1], x[2], x[3]))
-    print()
+    if x == None:
+        print("Id dosen't exist")
+
+    else:
+        print("{:^9}{:^30}{:^15}{:^10}".format("Id", "Name", "Department", "Salary"))
+        print("{:^9}{:^30}{:^15}{:^10}".format(x[0], x[1], x[2], x[3]))
+        print()
 
 def add():
-    print("Enter the new employee information")
-    id = int(input("Id: "))
-    name = input("Name: ")
-    dept = input("Department: ")
-    sal = int(input("Salary: "))
+    print()
+    while True:
+        print("Enter the new employee information")
+        id = int(input("Id: "))
+        name = input("Name: ")
+        dept = input("Department: ")
+        sal = int(input("Salary: "))
+        print()
+        false = input("Enter Y to confirm details: ")
+
+        if false.lower() == "Y":
+                break
+        else:
+            print("Renter data")
+            print()
 
     cr.execute(f"insert into emp values ({id}, '{name}', '{dept}', {sal})")
     obj.commit()
     print()
 
 def update():
-    print("Enter the employee id to be changed")
-    id = int(input("Id: "))
-    name = input("Name: ")
-    dept = input("Department: ")
-    sal = int(input("Salary: "))
+    while True:    
+        print()
+        print("Enter the employee id to be changed")
+        id = int(input("Id: "))
+        name = input("Name: ")
+        dept = input("Department: ")
+        sal = int(input("Salary: "))
+        print()
+        false = input("Enter Y to confirm details: ")
+
+        if false.lower() == "Y":
+                break
+        else:
+            print("Renter data")
 
     cr.execute(f"update emp set name = '{name}', dept = '{dept}', salary = {sal} where empid = {id}")
     obj.commit()
     print()
 
 def delete():
-    id = int(input("Enter the Id to be deleted: "))
+
+    while True:
+        print()
+        id = int(input("Enter the Id to be deleted: "))
+
+        false = input("Enter Y to confirm details: ")
+
+        if false.lower() == "Y":
+            break
+        else:
+            print("Renter data")
+
     cr.execute(f"delete from emp where empid = {id}")
     obj.commit()
-    print()
 
 def employee():
     while True:
         print()
         print("""Choose an option from below
         
-        a) Employee Data
-        b) Search Id
-        c) Add Employee
-        d) Update Id
-        e) Delete Id
-        f) Exit
+        1) Employee Data
+        2) Search Id
+        3) Add Employee
+        4) Update Id
+        5) Delete Id
+        6) Exit
         """)
-        cho = input("Enter your option: ")
+        cho = input("Enter your option: ").lower()
 
-        if cho.lower() == "a":
+        if cho == "1":
             display()
-        elif cho.lower() == "b":
+        elif cho == "2":
             search()
-        elif cho.lower() == "c":
+        elif cho == "3":
             add()
-        elif cho.lower() == "d":
+        elif cho == "4":
             update()
-        elif cho.lower() == "e":
+        elif cho == "5":
             delete()
-        elif cho.lower() == "f":
+        elif cho == "6":
             break
         else:
             print()
