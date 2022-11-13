@@ -6,28 +6,27 @@ def earning():
 
     cr = obj.cursor()
 
-    #import this from the sql file
-    #better to import each sperately, else a list
-    #sum of the worker salaries
     cr.execute("select sum(count) from rooms where roomno between 1 and 40")
     a = cr.fetchone()
-    print(f"Number of Standard Room: {a[0]}")
+    a = int(a[0])    
+    print(f"Number of Standard Room: {a}")
 
     cr.execute("select sum(count) from rooms where roomno between 41 and 60")
     b = cr.fetchone()
-    print(f"Number of Superior Room: {b[0]}")
+    b = int(b[0])
+    print(f"Number of Superior Room: {b}")
 
     cr.execute("select sum(count) from rooms where roomno between 61 and 70")
     c = cr.fetchone()
-    print(f"Number of Executive Rooms: {c[0]}")
+    c = int(c[0])
+    print(f"Number of Executive Rooms: {c}")
 
-    cr.execute("select sum(count) from rooms where roomno between 61 and 70")
+    cr.execute("select sum(count) from rooms where roomno between 71 and 75")
     d = cr.fetchone()
-    print(f"Number of Presidential: {d[0]}")
-
+    d = int(d[0])
+    print(f"Number of Presidential: {d}")
 
     colors = ["red", "orange", "yellow", "lightskyblue"]
-
 
     mpl.pie([a, b, c, d], labels = ["Standard Rooms", "Superior Rooms", "Executive Rooms", "Presidential Suites"], colors = colors)
 
