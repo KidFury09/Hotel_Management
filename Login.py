@@ -1,3 +1,4 @@
+from FrontDesk import desk
 from hmng import manager
 
 ids = {"Keshav" : ["Password","Manager"], "Hayden" : ["password", "Front_Desk"]}
@@ -19,9 +20,11 @@ while True:
             if c == 1:
                 break
         elif Pass == psw[0] and psw[1] == "Front_Desk":
-            pass
-            #check for which user; manager or front desk
-            # Manager or clerk interface
+            desk()
+            c = 1
+            if c == 1:
+                break
+
         else:
             print("Password is incorrect. Please try again")
             print()
