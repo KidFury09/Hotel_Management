@@ -13,22 +13,34 @@ def earning():
     a = cr.fetchone()
     a = int(a[0])    
     print(f"Number of Standard Room: {a}")
-    
+    sum_a = a * 500
+    print(f"Sales Gain: {sum_a}")
+    print()
+
     cr.execute("select sum(count) from rooms where roomno between 41 and 60")
     b = cr.fetchone()
     b = int(b[0])
     print(f"Number of Superior Room: {b}")
+    sum_b = b * 500
+    print(f"Sales Gain: {sum_b}")
+    print()
 
     cr.execute("select sum(count) from rooms where roomno between 61 and 70")
     c = cr.fetchone()
     c = int(c[0])
     print(f"Number of Executive Rooms: {c}")
+    sum_c = c * 500
+    print(f"Sales Gain: {sum_c}")
+    print()
 
     cr.execute("select sum(count) from rooms where roomno between 71 and 75")
     d = cr.fetchone()
     d = int(d[0])
     print(f"Number of Presidential: {d}")
-
+    sum_d = d * 500
+    print(f"Sales Gain: {sum_d}")
+    print()
+    print(f"Total Profits: {sum_a + sum_b + sum_c + sum_d}")
 
     colors = ["red", "orange", "yellow", "lightskyblue"]
 
