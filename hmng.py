@@ -16,6 +16,7 @@ def manager():
             employee()
         
         elif cho == "b":
+            print()
             earning()
 
         elif cho == "c":
