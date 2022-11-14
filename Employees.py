@@ -39,7 +39,7 @@ def add():
         print()
         false = input("Enter Y to confirm details: ")
 
-        if false.lower() == "Y":
+        if false.lower() == "y":
                 break
         else:
             print("Renter data")
@@ -47,6 +47,8 @@ def add():
 
     cr.execute(f"insert into emp values ({id}, '{name}', '{dept}', {sal})")
     obj.commit()
+    print()
+    print(f"{id} has been cretaed")
     print()
 
 def update():
@@ -60,13 +62,15 @@ def update():
         print()
         false = input("Enter Y to confirm details: ")
 
-        if false.lower() == "Y":
+        if false.lower() == "y":
                 break
         else:
             print("Renter data")
 
     cr.execute(f"update emp set name = '{name}', dept = '{dept}', salary = {sal} where empid = {id}")
     obj.commit()
+    print()
+    print(f"{id} updated")
     print()
 
 def delete():
@@ -77,13 +81,14 @@ def delete():
 
         false = input("Enter Y to confirm details: ")
 
-        if false.lower() == "Y":
+        if false.lower() == "y":
             break
         else:
             print("Renter data")
 
     cr.execute(f"delete from emp where empid = {id}")
     obj.commit()
+    print(f"{id} deleted from database")
 
 def employee():
     while True:
