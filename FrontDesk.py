@@ -34,7 +34,7 @@ def desk():
 
     while True:
         print()
-        print("""Please Chose An Option
+        print("""Please Choose An Option
     1) Adding Guest
     2) Removing Guest
     3) Exit""")
@@ -47,11 +47,10 @@ def desk():
                 guest = input("Customer name: " )
                 pnum = input("Phone number: ")
                 print()
-                guest_n = int(input("Number of Guests: "))
-                print()
+            
                 false = input("Enter Y to confirm details: ")
 
-                if false.lower() == "Y":
+                if false.lower() == "y":
                     break
                 else:
                     print("Renter data")
@@ -70,7 +69,7 @@ def desk():
                 print()
                 false = input("Enter Y to confirm details: ")
 
-                if false.lower() == "Y":
+                if false.lower() == "y":
                     break
                 else:
                     print("Renter data")
@@ -90,7 +89,8 @@ def desk():
             print()
             money_g = int(input("Money Given: "))
             change = print(f"Change: {money_g - cost}")
-
+            print("Updated Data")
+            print()
             #create a list that contains [name, [room types], phone number]
             #put the cost in the sql file as well so its easy to add
             #store the amount of times each room is used
@@ -106,7 +106,7 @@ def desk():
                         x = cr.fetchone()
                         x = int(x[0])
 
-                        cr.execute(f"update rooms set guest = '{guest}', noguest = {guest_n}, phonenum = {pnum} where roomno = {x}")
+                        cr.execute(f"update rooms set guest = '{guest}', phonenum = {pnum} where roomno = {x}")
                         cr.execute(f"update rooms set count = count + 1 where roomno = {x}")
                         a += 1
                         obj.commit()
@@ -117,7 +117,7 @@ def desk():
                         x = cr.fetchone()
                         x = int(x[0])
 
-                        cr.execute(f"update rooms set guest = '{guest}', noguest = {guest_n}, phonenum = {pnum} where roomno = {x}")
+                        cr.execute(f"update rooms set guest = '{guest}', phonenum = {pnum} where roomno = {x}")
                         cr.execute(f"update rooms set count = count + 1 where roomno = {x}")
                         b += 1
                         obj.commit()
@@ -128,7 +128,7 @@ def desk():
                         x = cr.fetchone()
                         x = int(x[0])
 
-                        cr.execute(f"update rooms set guest = '{guest}', noguest = {guest_n}, phonenum = {pnum} where roomno = {x}")
+                        cr.execute(f"update rooms set guest = '{guest}', phonenum = {pnum} where roomno = {x}")
                         cr.execute(f"update rooms set count = count + 1 where roomno = {x}")
                         c += 1
                         obj.commit()
@@ -139,7 +139,7 @@ def desk():
                         x = cr.fetchone()
                         x = int(x[0])
 
-                        cr.execute(f"update rooms set guest = '{guest}', noguest = {guest_n}, phonenum = {pnum} where roomno = {x}")
+                        cr.execute(f"update rooms set guest = '{guest}', phonenum = {pnum} where roomno = {x}")
                         cr.execute(f"update rooms set count = count + 1 where roomno = {x}")
                         d += 1
                         obj.commit()
@@ -147,8 +147,10 @@ def desk():
 
         elif cho == "2":
             n = input("Enter the guest name to be removed: ")
-            cr.execute(f"update rooms set guest = Null, noguest = 0, phonenum = Null where guest = '{n}' ")
+            cr.execute(f"update rooms set guest = Null,  phonenum = Null where guest = '{n}' ")
             obj.commit()
+            print(f"{n} has been removed from the data base")
+            print()
 
         elif cho == "3":
             break
