@@ -7,19 +7,18 @@ Code for creating the 75 rooms:
 Table should have:
 RoomNo: int Primay Key
 Guest: varchar(25)
-NoGuest: int
 PhoneNum: varchar(15)
 Count: int
 
 =========================================================================================================================================================================
 import mysql.connector as mql
 
-obj = mql.connect(host = "localhost", user = "root", passwd = "hayden", database = "hotel")
+obj = mql.connect(host = "localhost", user = "root", passwd = <password>, database = "hotel")
 
 cr = obj.cursor()
 
 for i in range(1,76):
-    cr.execute(f"insert into rooms values ({i}, Null, Null, Null, 0)")
+    cr.execute(f"insert into rooms values ({i}, Null, Null, 0)")
     obj.commit()
 
 obj.close()
