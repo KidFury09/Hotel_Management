@@ -1,4 +1,5 @@
 import mysql.connector as mql
+from time import sleep
 
 obj = mql.connect(host = "localhost", user = "root", passwd = "hayden", database = "hotel")
 cr = obj.cursor()
@@ -106,14 +107,24 @@ def employee():
 
         if cho == "1":
             display()
+            sleep(2)
+
         elif cho == "2":
             search()
+            sleep(2)
+
         elif cho == "3":
             add()
+            sleep(2)
+
         elif cho == "4":
             update()
+            sleep(2)
+
         elif cho == "5":
             delete()
+            sleep(2)
+            
         elif cho == "6":
             break
         else:
