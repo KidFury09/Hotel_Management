@@ -11,6 +11,7 @@ PhoneNum: varchar(15)
 Count: int
 
 =========================================================================================================================================================================
+
 import mysql.connector as mql
 
 obj = mql.connect(host = "localhost", user = "root", passwd = <password>, database = "hotel")
