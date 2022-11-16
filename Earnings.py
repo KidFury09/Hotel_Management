@@ -1,5 +1,6 @@
 import matplotlib.pyplot as mpl
 import mysql.connector as mql
+from time import sleep
 
 def earning():
     obj = mql.connect(host = "localhost", user = "root", passwd = "hayden", database = "hotel")
@@ -33,6 +34,8 @@ def earning():
     print(f"Sales Gain: {sum_c}")
     print()
 
+    sleep(2)
+
     cr.execute("select sum(count) from rooms where roomno between 71 and 75")
     d = cr.fetchone()
     d = int(d[0])
@@ -47,6 +50,7 @@ def earning():
     if a == 0 or b == 0 or c == 0 or d == 0:
         print()
         
-    else:    
+    else:
+        sleep(2)    
         mpl.pie([a, b, c, d], labels = ["Standard Rooms", "Superior Rooms", "Executive Rooms", "Presidential Suites"], colors = colors)
         mpl.show()
