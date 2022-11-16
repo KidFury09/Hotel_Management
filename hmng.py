@@ -1,11 +1,13 @@
 from Earnings import earning
 from Employees import employee
+from time import sleep
 
 def manager():
+    
     while True:
         print("""
         Choose an option
-        a) Employee Fuctions
+        a) Employee Functions
         b) Room records
         c) Exit
         """)
@@ -14,10 +16,12 @@ def manager():
 
         if cho == "a":
             employee()
-        
+            sleep(2)
+
         elif cho == "b":
             print()
             earning()
+            sleep(2)
 
         elif cho == "c":
             break
@@ -25,3 +29,4 @@ def manager():
         else:
             print()
             print("Invalid Input")
+            sleep(2)
